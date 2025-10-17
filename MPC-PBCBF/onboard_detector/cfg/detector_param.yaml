@@ -1,0 +1,77 @@
+# ----------------------------- myself -------------------------------------
+localization_mode: 1 # 0: pose (default) 1: odom
+
+depth_image_topic: /zed2/zed_node/depth/depth_registered
+pose_topic: /zed2i/zed_node/pose
+aligned_depth_image_topic: /zed2/zed_node/left_raw/image_raw_color
+odom_topic: /base_pose_ground_truth
+
+# Camera Parameters
+depth_intrinsics: [241.245043295, 242.02536811, 320.13062082, 174.93689173] # fx,  fy, cx, cy realsense
+color_intrinsics: [604.404296875, 604.404296875, 325.03704833984375, 245.77059936523438] # intel realsense
+depth_scale_factor: 100 # 1000 for Intel Realsense Camera
+depth_min_value: 0.3
+depth_max_value: 5.0
+depth_filter_margin: 2 # filter
+depth_skip_pixel: 2  # filter
+image_cols: 640  #1280
+image_rows: 360  #720
+body_to_camera: [0.0,  0.0,  1.0,  0.065, # 怀疑
+                -1.0,  0.0,  0.0,  0.01,   
+                 0.0, -1.0,  0.0,  0.12,
+                 0.0,  0.0,  0.0,  1.0]
+body_to_camera_color: [0.0,  0.0,  1.0,  0.065,
+                      -1.0,  0.0,  0.0,  0.025,   
+                       0.0, -1.0,  0.0,  0.12,
+                       0.0,  0.0,  0.0,  1.0]
+
+# Raycasting (max depth)
+raycast_max_length: 5.0
+
+# time difference
+time_difference: 0.033 # 0.033
+
+# sensor data processing
+voxel_occupied_thresh: 15 # min num of points for a voxel to be occupied in voxel filter
+
+# dbscan
+ground_height: 0.0  # height of ground to remove ground points(0.2)
+dbscan_min_points_cluster: 10 # 20: 4.0m range; 30: 3.5m range 40: 3.0m range (10)
+dbscan_search_range_epsilon: 0.1 # searching range radius
+
+# dbscan filter (for yolo)
+dbscan_min_points_cluster_filter: 10 # 20: 4.0m range; 30: 3.5m range 40: 3.0m range (10)
+dbscan_search_range_epsilon_filter: 0.05 # searching range radius
+
+# bounding box filtering
+filtering_BBox_IOU_threshold: 0.05
+yolo_overwrite_distance: 3
+
+# tracking and data association
+history_size: 100 # size of tracking history. history[0] is current detection
+similarity_threshold: 0.02 # similiary threshold for data association matching comparison
+fix_size_history_threshold: 10 # History threshold (num of frames) to fix box size
+fix_size_dimension_threshold: 0.4 # dimension threshold (size of proportional) to fix box size
+
+e_p: 0.25
+e_q_pos: 0.01
+e_q_vel: 0.05
+e_q_acc: 0.05
+e_r_pos: 0.04
+e_r_vel: 0.3
+e_r_acc: 0.6
+
+kalman_filter_averaging_frames: 10
+
+# classification
+frame_skip: 5 # num of frames skiped when comparing 2 point clouds
+dynamic_velocity_threshold: 0.1
+dynamic_voting_threshold: 0.8
+maximum_skip_ratio: 0.5 # the upper limit of points that are skipped(out of previous FOV) to be classfified as dynamic
+frames_force_dynamic: 10 # Range of searching dynamic obstacles in box history
+frames_force_dynamic_check_range: 30 # threshold for forcing dynamic obstacles
+dynamic_consistency_threshold: 5 # obstacles being voted as dynamic for continuous k frames are eligible to be classified as dynamic
+
+# constrain size
+constrain_size: true
+target_object_size: [0.5, 0.4, 0.9]
