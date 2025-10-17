@@ -1,0 +1,3 @@
+<launch>
+	<node pkg="obs_param" type="obs_kf" name="obs_kf" output="screen" />
+</launch>
