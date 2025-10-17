@@ -1,6 +1,7 @@
 # Point Cloud-Based Control Barrier Functions for Model Predictive Control in Safety-Critical Navigation of Autonomous Mobile Robots
 
 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS2025)
+
 Arvix: https://arxiv.org/abs/2510.02885
 
 ## Run on your device
@@ -40,3 +41,4 @@ We used codes in **[onboard_detector](https://github.com/Zhefan-Xu/onboard_detec
 - Z. Xu, X. Zhan, et al. "Onboard dynamic-object detection and tracking for autonomous robot navigation with RGB-D camera." RAL 2024.
 
 - Z. Xu, X. Zhan, et al. "A real-time dynamic obstacle tracking and mapping system for UAV navigation and collision avoidance with an RGB-D camera." ICRA 2023.
+
