@@ -1,0 +1,62 @@
+sensor_input_mode: 0 # 0 camera 1: lidar
+localization_mode: 1 # 0: pose (default) 1: odom
+# zed camera(foxy)
+# depth_image_topic: /zed/zed_node/depth/depth_registered
+# pose_topic: /zed/zed_node/pose
+# zed camera(noetic)
+depth_image_topic: /zed2/zed_node/depth/depth_registered
+pose_topic: /zed2/zed_node/imu/data
+odom_topic: /base_pose_ground_truth
+# pose_topic: /mavros/local_position/pose
+# odom_topic: /mavros/local_position/odom
+
+# robot size
+# robot_size: [0.341, 0.339, 0.192]
+robot_size: [0.0, 0.0, 0.0]
+# 地图膨胀+地图分辨率
+# robot_size: [0.541, 0.539, 0.192] 
+
+# Camera Parameters
+depth_intrinsics: [241.245043295, 242.02536811, 320.13062082, 174.93689173] # fx,  fy, cx, cy
+depth_scale_factor: 10 # 1000 for Intel Realsense Camera
+depth_min_value: 0.3
+depth_max_value: 5.0
+depth_filter_margin: 2 # filter
+depth_skip_pixel: 2 # filter
+image_cols: 640 #1280
+image_rows: 360 #720
+body_to_camera: [0.0,  0.0,  1.0,  0.0,
+                -1.0,  0.0,  0.0,  0.0 ,   
+                 0.0, -1.0,  0.0,  0.3,
+                 0.0,  0.0,  0.0,  1.0]
+# body_to_camera: [1.0,  0.0,  0.0,  0.0,
+#                  0.0,  1.0,  0.0,  0.0,   
+#                  0.0,  0.0,  1.0,  0.0,
+#                  0.0,  0.0,  0.0,  1.0]
+
+# Raycasting
+raycast_max_length: 5.0
+p_hit: 0.70
+p_miss: 0.25  # 0.35
+p_min: 0.12
+p_max: 0.97
+p_occ: 0.80
+
+
+# Map
+map_resolution: 0.1
+ground_height: 0.1 # m
+map_size: [40, 40, 3] # meter. in x y z direction (reserved size)
+local_update_range: [5, 5, 5] # 局部地图范围
+local_bound_inflation: 3.0 # inflate local bound in meter
+clean_local_map: false
+
+# visualziation
+local_map_size: [40, 40, 6] # meter. in x y z direction (only for visualization)
+max_height_visualization: 2.5 # m
+min_height_visualization: 0.0 # m
+visualize_global_map: true
+verbose: false
+
+# prebuilt_map_directory: "No"
+# prebuilt_map_directory: "path/to/static_map.pcd"

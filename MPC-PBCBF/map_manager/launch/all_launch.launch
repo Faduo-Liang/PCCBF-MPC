@@ -1,0 +1,30 @@
+<launch>
+<!-- dynamic.launch -->
+    <include file="$(find scene)/launch/start.launch">
+        <arg name="world" value="$(find scene)/worlds/comparative_simulation.world" />
+        <arg name="gui" value="true"/>
+    </include>
+    <include file="$(find jackal_description)/launch/description.launch" />
+    <include file="$(find jackal_control)/launch/control.launch">
+        <arg name="enable_ekf" value="false" />
+    </include>
+    <include file="$(find jackal_control)/launch/teleop.launch">
+        <arg name="joystick" value="false" />
+    </include>
+    <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model"
+        args="-urdf -model jackal -param robot_description -x 10.0 -y 0 -z 1.0" />
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find scene)/rviz_config/simulation.rviz" required="true" />
+
+<!-- dynamic_map.launch -->
+	<node pkg="tf" type="static_transform_publisher" name="map_to_world" args="0.0 0.0 0.0 0.0 0.0 0.0 world map 30" />
+	<rosparam file="$(find map_manager)/cfg/dynamic_map_param.yaml" ns="/dynamic_map"  />
+	<rosparam file="$(find onboard_detector)/cfg/detector_param.yaml" ns="/onboard_detector" />
+	<node pkg="map_manager" type="dynamic_map_node" name="dynamic_map_node" output="screen" />
+
+<!-- run_obs_predict.launch -->
+    <node pkg="obs_param" type="obs_kf" name="obs_kf" output="screen" />
+
+<!-- local_planner.launch -->
+    <node pkg="local_planner" type="local_planner" name="local_planner" output="screen" />
+
+</launch>
