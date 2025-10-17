@@ -4,6 +4,17 @@ IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS2025)
 
 Arvix: https://arxiv.org/abs/2510.02885
 
+## Installation
+This package has been tested on Ubuntu 20.04 LTS with ROS Noetic, needs ROS vision_msgs ipopt casadi torch package
+
+```bash
+# for yolo_detector
+conda create -n your_env python=3.8
+conda activate your_env
+conda install pytorch==2.3.1 torchvision==0.18.1 torchaudio==2.3.1 pytorch-cuda=12.1 -c pytorch -c nvidia
+```
+
+
 ## Run on your device
 
 ```bash
@@ -41,4 +52,5 @@ We used codes in **[onboard_detector](https://github.com/Zhefan-Xu/onboard_detec
 - Z. Xu, X. Zhan, et al. "Onboard dynamic-object detection and tracking for autonomous robot navigation with RGB-D camera." RAL 2024.
 
 - Z. Xu, X. Zhan, et al. "A real-time dynamic obstacle tracking and mapping system for UAV navigation and collision avoidance with an RGB-D camera." ICRA 2023.
+
 
